@@ -1,0 +1,18 @@
+{
+    "name": "aurele/quizz",
+    "description": "PHP 8.3 project with MVC pattern and URL rewriting",
+    "type": "project",
+    "license": "ISC",
+    "autoload": {
+        "psr-4": {
+            "Entities\\": "src/models/"
+        }
+    },
+    "authors": [
+        {
+            "name": "aurèle",
+            "email": "aurelien.plazzotta@tutanota.com"
+        }
+    ],
+    "require": {}
+}
