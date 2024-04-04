@@ -6,14 +6,13 @@ namespace Entities\Quizz;
 
 class Quizz
 {
-  // public function __construct(readonly private string $title = 'No title choosen', private ?QuestionCollection $questions)
-  public function __construct(readonly private string $title = 'No title choosen', private QuestionCollection $questions = new CollectionQuestion())
+  public function __construct(private string $title = 'No title choosen', private QuestionCollection $questions = new QuestionCollection())
   {
     $this->title = $title;
     $this->questions = $questions;
   }
 
-  public function __get(string $title): string
+  public function getTitle(): string
   {
     return $this->title;
   }

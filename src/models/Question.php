@@ -6,10 +6,10 @@ namespace Entities\Quizz;
 
 class Question
 {
-  public function __construct(readonly protected string $title, protected string $contents)
+  public function __construct(readonly protected string $title, protected ResponseCollection $responses = new ResponseCollection())
   {
     $this->title = $title;
-    $this->contents = $contents;
+    $this->responses = $responses;
   }
 
   public function __get(string $property): string
