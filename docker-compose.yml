@@ -4,6 +4,6 @@ services:
     container_name: 'PHP-SERVER'
     build: ./build/php/
     volumes:
-      - ./src:/srv/www/apache
+      - .:/var/www/html
     ports:
-      - 83:80
+      - 80:80
