@@ -1,0 +1,40 @@
+{
+  "title": "Basic PHP Quizz",
+  "questions": [
+    {
+      "text": "What does PHP means?",
+      "responses": [
+        {"text": "Personal Home Page", "isValid": false},
+        {"text": "PHP: Hypertext Preprocessor", "isValid": true},
+        {"text": "Private Home Page", "isValid": false},
+      ]
+    },
+    {
+      "text": "Which function is used to append an element in an PHP array?",
+      "reponses": [
+        {"text": "array_push()", "isValid": true},
+        {"text": "array_pop()", "isValid": false},
+        {"text": "array_insert()", "isValid": false},
+        {"text": "array_unshift()", "isValid": false},
+      ]
+    },
+    {
+      "text": "How do you declare a variable in PHP?",
+      "responses:" [
+      {"text": "$variableName", "isValid", true},
+      {"text": "var variableName", "isValid", false},
+      {"text": "variableName", "isValid", false},
+      {"text": "#variableName", "isValid", false},
+    ]
+    },
+    {
+      "text": "Which operator is used to concatenate two strings in PHP?",
+      "responses": [
+        {"text": ".", "isValid", true},
+        {"text": "+", "isValid", false},
+        {"text": "&", "isValid", false},
+        {"text": "||", "isValid", false},
+      ]
+    },
+  ]
+}
