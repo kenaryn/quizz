@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
 
 use Entities\Quizz\Quizz as Quizz;
+use Entities\Quizz\Question as Question;
 
 class QuizzTest extends TestCase
 {
@@ -16,5 +19,14 @@ class QuizzTest extends TestCase
   {
     $quizz = new Quizz('Quizz about PHP');
     $this->assertSame('Quizz about PHP', $quizz->title);
+  }
+
+  public function test_3()
+  {
+    $quizz = new Quizz('Quizz about PHP');
+    $quizz->addQuestion(new Question('What is a constructor?'));
+    $quizz->addQuestion(new Question('What is an attribute?'));
+    $this->assertSame('Quizz about PHP', $quizz->title);
+    $this->assertSame(2, $quizz->getQuestion()->count());
   }
 }
