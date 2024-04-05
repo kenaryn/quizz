@@ -29,7 +29,13 @@ class Quizz
 
   public static function create(mixed $jsonObject): Quizz
   {
-    $res = new Quizz();
-    return $res;
+    $rawData = json_decode($jsonObject);
+    $obj = new Quizz();
+    foreach ($rawData as $k => $v) {
+      foreach ($v as $question => $response) {
+        $obj->addQuestion($question, new ResponseCollection($response));
+      }
+    }
+    return $obj;
   }
 }
