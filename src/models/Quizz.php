@@ -27,14 +27,17 @@ class Quizz
     $this->questions[] = $question;
   }
 
-  public static function create(mixed $jsonObject): Quizz
+  public static function create($jsonObject): Quizz
   {
-    $rawData = json_decode($jsonObject);
-    $obj = new Quizz();
-    foreach ($rawData as $k => $v) {
-      foreach ($v as $question => $response) {
-        $obj->addQuestion($question, new ResponseCollection($response));
+
+    $obj = new Quizz($jsonObject->title);
+    foreach ($jsonObject->questions as $k => $v) {
+      $question = new Question($v->text);
+      foreach ($v->responses as $key => $r) {
+        $response = new Response($r->text,$r->isValid);
+        $question->addResponse($response);
       }
+      $obj->addQuestion($question);
     }
     return $obj;
   }

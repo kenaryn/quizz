@@ -6,9 +6,21 @@ namespace Entities\Quizz;
 
 class Response
 {
-  public function __construct(private string $title, private bool $isValid = false)
+  public function __construct(private string $text, private bool $isValid = false)
   {
-    $this->title = $title;
+    $this->text = $text;
     $this->isValid = $isValid;
   }
+
+  public function isValid(): bool
+  {
+    return $this->isValid;
+  }
+
+  public function getText(): string
+  {
+    return $this->text;
+  }
+
+  
 }

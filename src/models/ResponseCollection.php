@@ -57,6 +57,12 @@ class ResponseCollection implements \ArrayAccess, \Countable
     if (!($value instanceof Response)) {
       throw new \InvalidArgumentException("Must be a Response!");
     }
+      if (empty($offset)) {
+        $this->responses[] = $value;
+      } else {
+        $this->responses[$offset] = $value;
+      }
+
   }
 
   public function offsetUnset(mixed $offset): void

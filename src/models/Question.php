@@ -25,4 +25,17 @@ final class Question
   {
     return $this->title;
   }
+
+  public function addResponse(Response $response): void
+  {
+    // if ($responses instanceof ResponseCollection) {
+    //   foreach ($responses as $response) {
+    //     array_push($responses, $response);
+    //     // $responses->append($response);
+    //   }
+    // } else {
+    //   throw new \InvalidArgumentException("You must enter a Question!");
+    // }
+    $this->responses[] = $response;
+  }
 }

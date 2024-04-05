@@ -11,7 +11,7 @@
     },
     {
       "text": "Which function is used to append an element in an PHP array?",
-      "reponses": [
+      "responses": [
         {"text": "array_push()", "isValid": true},
         {"text": "array_pop()", "isValid": false},
         {"text": "array_insert()", "isValid": false},
@@ -20,7 +20,7 @@
     },
     {
       "text": "How do you declare a variable in PHP?",
-      "responses:" [
+      "responses": [
       {"text": "$variableName", "isValid": true},
       {"text": "var variableName", "isValid": false},
       {"text": "variableName", "isValid": false},
