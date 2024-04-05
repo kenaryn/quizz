@@ -6,9 +6,15 @@ namespace Entities\Quizz;
 
 class ResponseCollection implements \ArrayAccess, \Countable
 {
+  public function __construct(private array $responses = [], private int $position = 0, private int $response = 0) {
+    $this->responses = $responses;
+    $this->position = $position;
+    $this->response = $response;
+  }
+  
   public function count(): int
   {
-    return count($this->values);
+    return count($this->responses);
   }
 
   public function rewind(): void
@@ -23,7 +29,7 @@ class ResponseCollection implements \ArrayAccess, \Countable
 
   public function current(): Question
   {
-    return $this->values[$this->position];
+    return $this->response[$this->position];
   }
 
   public function next(): void
@@ -33,6 +39,28 @@ class ResponseCollection implements \ArrayAccess, \Countable
 
   public function valid(): bool
   {
-    return isset($this->values[$this->position]);
+    return isset($this->response[$this->position]);
+  }
+
+  public function offsetExists(mixed $offset): bool
+  {
+    return isset($this->responses[$offset]);
+  }
+
+  public function offsetGet(mixed $offset): Response
+  {
+    return $this-> responses[$offset];
+  }
+
+  public function offsetSet(mixed $offset, mixed $value): void
+  {
+    if (!($value instanceof Response)) {
+      throw new \InvalidArgumentException("Must be a Response!");
+    }
+  }
+
+  public function offsetUnset(mixed $offset): void
+  {
+    unset($this->responses[$offset]);
   }
 }

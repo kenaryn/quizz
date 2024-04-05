@@ -25,7 +25,7 @@ class QuizzTest extends TestCase
   public function test_3()
   {
     $quizz = new Quizz('Quizz about PHP');
-    $quizz->addQuestion(new Question('What is a constructor?', new ResponseCollection('a bird', 'a dog', 'an invention!')));
+    $quizz->addQuestion(new Question('What is a constructor?', new ResponseCollection(['a bird', 'a dog', 'an invention!'])));
     $quizz->addQuestion(new Question('What is an attribute?'));
     $this->assertSame('Quizz about PHP', $quizz->getTitle());
     $this->assertSame(2, $quizz->getQuestion()->count());

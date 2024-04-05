@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Entities\Quizz;
 
-class QuestionCollection implements \ArrayAccess
+class QuestionCollection implements \ArrayAccess, \Countable
 {
-  public function __construct(private $values = [], private int $position = 0)
+  public function __construct(private array $questions = [], private int $position = 0)
   {
-    $this->values = $values;
+    $this->questions = $questions;
   }
 
   public function offsetExists(mixed $offset): bool
   {
-    return isset($this->values[$offset]);
+    return isset($this->questions[$offset]);
   }
 
   public function offsetGet(mixed $offset): Question
   {
-    return $this->values[$offset];
+    return $this->questions[$offset];
   }
 
   public function offsetSet(mixed $offset, mixed $value): void
@@ -28,14 +28,19 @@ class QuestionCollection implements \ArrayAccess
     }
 
     if (empty($offset)) {
-      $this->values[] = $value;
+      $this->questions[] = $value;
     } else {
-      $this->values[$offset] = $value;
+      $this->questions[$offset] = $value;
     }
   }
 
   public function offsetUnset(mixed $offset): void
   {
-    unset($this->values[$offset]);
+    unset($this->questions[$offset]);
+  }
+
+  public function count(): int
+  {
+    return count($this->questions);
   }
 }
