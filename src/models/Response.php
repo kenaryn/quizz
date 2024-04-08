@@ -25,7 +25,7 @@ class Response
 
   public static function listResponsesById(int $id): ResponseCollection
   {
-    $stmt = Database::getInstance()->getConnexion()->prepare('select * from Question, Response where numQuizz = :id and numQuestion = Question.id;');
+    $stmt = Database::getInstance()->getConnexion()->prepare('select * from  Response where numQuestion = :id;');
     $stmt->execute(['id' => $id]);
     $list = new ResponseCollection();
     while ($row = $stmt->fetch()) {
@@ -34,5 +34,4 @@ class Response
 
     return $list;
   }
-  
 }

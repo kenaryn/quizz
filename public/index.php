@@ -25,5 +25,6 @@ try {
 // echo '<br>';
 // print_r(Quizz::filter('language'));
 // echo '<br>';
-print_r(Question::listQuestionsById(1));
+// print_r(Question::listQuestionsById(1));
+// print_r(Response::listResponsesById(1));
 print_r(Response::listResponsesById(1));
