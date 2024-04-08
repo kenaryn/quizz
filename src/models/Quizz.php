@@ -6,7 +6,7 @@ namespace Entities\Quizz;
 
 class Quizz
 {
-  public function __construct(private int $id = 0, private string $title = 'No title choosen', private QuestionCollection $questions = new QuestionCollection())
+  public function __construct(private string $title = 'No title choosen', private int $id = 0, private QuestionCollection $questions = new QuestionCollection())
   {
     $this->id = $id;
     $this->title = $title;
@@ -35,7 +35,7 @@ class Quizz
     foreach ($jsonObject->questions as $k => $v) {
       $question = new Question($v->text);
       foreach ($v->responses as $key => $r) {
-        $response = new Response($r->text,$r->isValid);
+        $response = new Response(text:$r->text, isValid:$r->isValid);
         $question->addResponse($response);
       }
       $obj->addQuestion($question);

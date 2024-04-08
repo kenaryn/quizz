@@ -6,9 +6,10 @@ namespace Entities\Quizz;
 
 final class Question
 {
-  public function __construct(protected string $title, protected ResponseCollection $responses = new ResponseCollection())
+  public function __construct(protected string $text, protected int $id = 0, protected ResponseCollection $responses = new ResponseCollection())
   {
-    $this->title = $title;
+    $this->id = $id;
+    $this->text = $text;
     $this->responses = $responses;
   }
 
@@ -23,7 +24,7 @@ final class Question
 
   public function getTitle(): string
   {
-    return $this->title;
+    return $this->text;
   }
 
   public function addResponse(Response $response): void
@@ -37,5 +38,17 @@ final class Question
     //   throw new \InvalidArgumentException("You must enter a Question!");
     // }
     $this->responses[] = $response;
+  }
+
+  public static function listQuestionsById(int $id): QuestionCollection
+  {
+    $stmt = Database::getInstance()->getConnexion()->prepare('select * from Question where numQuizz = :id;');
+    $stmt->execute(['id' => $id]);
+    $list = new QuestionCollection();
+    while ($row = $stmt->fetch()) {
+      $list[]= new Question(id:$row['id'], text:$row['text']);
+    }
+    
+    return $list;
   }
 }
