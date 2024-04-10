@@ -13,9 +13,19 @@ class Quizz
     $this->questions = $questions;
   }
 
+  public function getId(): int
+  {
+    return $this->id;
+  }
+
   public function getTitle(): string
   {
     return $this->title;
+  }
+
+  public function setTitle(string $title): void
+  {
+    $this->title = $title;
   }
 
   public function getQuestion(): QuestionCollection
@@ -31,11 +41,11 @@ class Quizz
   public static function create($jsonObject): Quizz
   {
 
-    $obj = new Quizz(title:$jsonObject->title);
+    $obj = new Quizz(title: $jsonObject->title);
     foreach ($jsonObject->questions as $k => $v) {
       $question = new Question($v->text);
       foreach ($v->responses as $key => $r) {
-        $response = new Response(text:$r->text, isValid:$r->isValid);
+        $response = new Response(text: $r->text, isValid: $r->isValid);
         $question->addResponse($response);
       }
       $obj->addQuestion($question);
@@ -49,7 +59,7 @@ class Quizz
     $stmt->execute();
     $list = new \ArrayObject();
     while ($row = $stmt->fetch()) {
-      $list[] = new Quizz(id:$row['id'], title:$row['title']);
+      $list[] = new Quizz(id: $row['id'], title: $row['title']);
     }
     return $list;
   }
@@ -60,14 +70,14 @@ class Quizz
      * Filter contents by sub-string in title.
      */
     $stmt = Database::getInstance()->getConnexion()->prepare("select * from Quizz where title like :textSearched;");
-    $stmt->execute(['textSearched' => '%'.$text.'%']);
+    $stmt->execute(['textSearched' => '%' . $text . '%']);
     $list = new \ArrayObject();
     while ($row = $stmt->fetch()) {
-      $list[] = new Quizz(id:$row['id'], title:$row['title']);
+      $list[] = new Quizz(id: $row['id'], title: $row['title']);
     }
     return $list;
   }
-  
+
 
   public static function findById(int $id): ?Quizz
   {
@@ -77,8 +87,27 @@ class Quizz
     $stmt = Database::getInstance()->getConnexion()->prepare('select * from Quizz where id = :id;');
     $stmt->execute(['id' => $id]);
     if ($row = $stmt->fetch()) {
-      return new Quizz(id:$row['id'], title:$row['title']);
+      return new Quizz(id: $row['id'], title: $row['title']);
     }
     return null;
+  }
+
+  public static function save(Quizz $quizz): void
+  {
+    echo "SAVE";
+    $stmt = Database::getInstance()->getConnexion()->prepare("INSERT into Quizz (title) values (:title);");
+    $stmt->execute(['title' => $quizz->getTitle()]);
+  }
+
+  public static function update(Quizz $quizz): void
+  {
+    $stmt = Database::getInstance()->getConnexion()->prepare('UPDATE Quizz set title = :title WHERE id = :id');
+    $stmt->execute(['title' => $quizz->getTitle(), 'id' => $quizz->getId()]);
+  }
+
+  public static function delete(Quizz $quizz): void
+  {
+    $stmt = Database::getInstance()->getConnexion()->prepare('DELETE from Quizz WHERE id = :id');
+    $stmt->execute(['id' => $quizz->getId()]);
   }
 }
